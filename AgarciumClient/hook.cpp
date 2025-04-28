@@ -95,6 +95,8 @@ namespace hook {
 	// The address of the function to hook
 	static DWORD_PTR dwInitLoginUI = 0x140e3e630;
 
+	bool AttemptedLogin = false;
+
 	void HookedInitLoginUI() {
 		// Call the original function
 		OriginalInitLoginUI();
@@ -102,6 +104,12 @@ namespace hook {
 		// Set our username/password
 		SetLoginUsername();
 		SetLoginPassword();
+
+		if (AttemptedLogin) {
+			// Already tried to login, stop us from getting into a loop.
+			return;
+		}
+		AttemptedLogin = true;
 
 		DWORD_PTR dwNetworkServicePtr = 0x14210d360;
 		DWORD_PTR dwNetworkServiceLogin = 0x140b5d6e0;
@@ -112,7 +120,6 @@ namespace hook {
 		NetworkServiceLogin_t NetworkServiceLogin = reinterpret_cast<NetworkServiceLogin_t>(dwNetworkServiceLogin);
 		NetworkServiceLogin(pNetworkService);
 	}
-
 
 	void LoginHook() {
 		MH_STATUS status = MH_CreateHook(
