@@ -1,0 +1,11 @@
+LIBRARY NxCharacter64
+
+EXPORTS
+    ??0NxControllerManager@@IEAA@XZ=ProxyNxControllerManagerConstructor0 PRIVATE
+    ??0NxControllerManager@@QEAA@AEBV0@@Z=ProxyNxControllerManagerConstructor1 PRIVATE
+    ??1NxControllerManager@@MEAA@XZ=ProxyNxControllerManagerDestructor PRIVATE
+    ??4NxControllerManager@@QEAAAEAV0@AEBV0@@Z=ProxyNxControllerManagerAssignmentOperator PRIVATE
+    ;??_7NxControllerManager@@6B@ PRIVATE
+
+    NxCreateControllerManager=ProxyNxCreateControllerManager
+    NxReleaseControllerManager=ProxyNxReleaseControllerManager
