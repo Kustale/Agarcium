@@ -21,17 +21,17 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     switch (ul_reason_for_call) {
         case DLL_PROCESS_ATTACH:
             // Load the original DLL
-            hOriginalDLL = LoadLibraryA("NxCharacter64.dll.bak");
+            hOriginalDLL = LoadLibraryA("NxCharacter64B.dll");
 
             if (hOriginalDLL == NULL) {
-                std::cerr << "Error: Failed to load original NxCharacter64.dll " << std::endl;
+                std::cerr << "Error: Failed to load original NxCharacter64.dll (Get dll file NxCharacter64.dll and Rename NxCharacter64B.dll)" << std::endl;
                 // Depending on criticality, you might want to exit the process
                 // ExitProcess(1);
                 return FALSE;
             }
 
             // Load our custom DLL
-            LoadLibraryA("AgarciumClient.dll");
+            LoadLibraryA("MapleStory2.dll");
 
             // Get addresses of the original functions using their mangled names
             OriginalNxControllerManagerConstructor0 = (OriginalNxControllerManagerConstructor0_t)GetProcAddress(hOriginalDLL, "??0NxControllerManager@@IEAA@XZ");
@@ -58,7 +58,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
                 !OriginalNxCreateControllerManager ||
                 !OriginalNxReleaseControllerManager)
             {
-                std::cerr << "Error: Failed to find all required functions in original NxCharacter64.dll" << std::endl;
+                std::cerr << "Error: Failed to find all required functions in original NxCharacter64.dll (Get dll file NxCharacter64.dll and Rename NxCharacter64B.dll)" << std::endl;
                 // You might want to free the library and return FALSE
                 FreeLibrary(hOriginalDLL);
                 hOriginalDLL = NULL;
